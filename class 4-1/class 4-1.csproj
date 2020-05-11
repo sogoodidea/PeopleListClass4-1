@@ -5,4 +5,12 @@
     <RootNamespace>class_4_1</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\class 4-1.data\class 4-1.data.csproj" />
+  </ItemGroup>
+
 </Project>

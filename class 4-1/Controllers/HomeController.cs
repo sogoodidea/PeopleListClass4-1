@@ -6,32 +6,30 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using class_4_1.Models;
+using class_4_1.data;
 
 namespace class_4_1.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
         public IActionResult Index()
         {
-            return View();
+            PplDb db = new PplDb();
+            HomeViewModel vm = new HomeViewModel();
+            vm.People = db.GetPeople(); 
+            return View(vm);
         }
-
-        public IActionResult Privacy()
+        public IActionResult AddPeople()
         {
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPost]
+        public IActionResult AddPeople(List<Person> ppl)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            PplDb db = new PplDb();
+            db.AddListPpl(ppl);
+            return Redirect("/home/index");
         }
     }
 }
